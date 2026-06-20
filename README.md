@@ -1,2 +1,10 @@
-# odin-calculator
-The final project of the Foundations Path from the free online curriculum "The Odin Project"
+# Odin Final Project: Calculator
+
+## What is it?
+This is the final project from The Odin Project's Foundations Course. It is a project that combines everything I've learned so far to make an on-screen calculator using JavaScript, HTML, and CSS.
+
+## My learnings from this project
+- 
+
+## Live demo
+[Try it yourself by clicking this text.]()

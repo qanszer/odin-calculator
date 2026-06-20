@@ -1,0 +1,33 @@
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+* {
+    margin: 0px;
+    padding: 0px;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background-image: url(./assets/calculator-bg.png);
+}
+[id] { 
+    scroll-margin-top: 150px; 
+}
+::selection {
+    /* background-color: ;
+    color: ; */
+}
