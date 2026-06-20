@@ -11,13 +11,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="titlebar">
-            <button class="undo">Undo</button>
-            <button class="modes">Basic</button>
-            <div class="titlebar-buttons">
-                <button class="minimize"></button>
-                <button class="maximize"></button>
-                <button class="exit"></button>
+        <div class="windowbar">
+            <button class="undo boxed-windowbar-button">Undo</button>
+            <button class="modes boxed-windowbar-button">
+                Basic
+                <img src="./assets/chevron-down.svg">
+            </button>
+            <div class="windowbar-buttons">
+                <button class="minimize circled-windowbar-button"><img src="./assets/minimize.svg" alt="minimize"></button>
+                <button class="maximize circled-windowbar-button"><img src="./assets/maximize.svg" alt="maximize"></button>
+                <button class="exit circled-windowbar-button"><img src="./assets/exit.svg" alt="exit"></button>
             </div>
         </div>
         <div class="history">

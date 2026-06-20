@@ -8,6 +8,7 @@ html {
 * {
     margin: 0px;
     padding: 0px;
+    color: #f6f7f9;
 }
 a {
     text-decoration: none;
@@ -22,7 +23,11 @@ ul {
 body {
     display: flex;
     flex-direction: column;
+    height: 100vh;
     background-image: url(./assets/calculator-bg.png);
+
+    justify-content: center;
+    align-items: center;
 }
 [id] { 
     scroll-margin-top: 150px; 
@@ -30,4 +35,80 @@ body {
 ::selection {
     /* background-color: ;
     color: ; */
+}
+
+.container {
+    background-color: #3b4252;
+    border-radius: 1rem;
+    -webkit-box-shadow: 1px 1px 10px 10px rgba(0,0,0,0.2); 
+    box-shadow: 1px 1px 10px 10px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    width: auto;
+}
+
+.windowbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2b313c;
+    padding: 0.5rem 1.1rem;
+    align-items: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    gap: 1rem;
+    border-bottom: 0.5px solid #1f232b50;
+}
+.boxed-windowbar-button {
+    background-color: #2a2f3a;
+    padding: 0.4rem 1.1rem;
+    text-align: center;
+    border: 0.5px solid #1f232b;
+    border-radius: 0.3rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
+}
+.boxed-windowbar-button img {
+    height: 1rem;
+    width: 1rem;
+}
+.windowbar-buttons {
+    display: flex;
+    gap: 0.8rem;
+}
+.circled-windowbar-button {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    border: 0.5px solid rgba(31, 35, 43, 0);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circled-windowbar-button img {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+
+    height: 0.9rem;
+    width: 0.9rem;
+}
+.circled-windowbar-button:hover img {
+    opacity: 1;
+}
+.circled-windowbar-button.minimize {
+    background-color: #ebcb8b;
+}
+.circled-windowbar-button.maximize {
+    background-color: #a3be8c;
+}
+.circled-windowbar-button.exit {
+    background-color: #bf616a;
 }
