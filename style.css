@@ -130,7 +130,7 @@ body {
 }
 .operation {
     color: #cecece;
-    width: 7rem;
+    width: 9rem;
 }
 .equals {
     color: #cecece;
@@ -184,6 +184,13 @@ body {
 .key.clear {
     border: 0;
     background-color: #bf616a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.key.clear img {
+    height: 1.1rem;
+    width: 1.1rem;
 }
 .key.equals {
     border: 0;
