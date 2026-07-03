@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 html {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -9,6 +11,7 @@ html {
     margin: 0px;
     padding: 0px;
     color: #f6f7f9;
+    font-family: 'JetBrains Mono';
 }
 a {
     text-decoration: none;
@@ -51,11 +54,12 @@ body {
     width: auto;
 }
 
+/* Window bar of the calculator */
 .windowbar {
     display: flex;
     justify-content: space-between;
     background-color: #2b313c;
-    padding: 0.5rem 1.1rem;
+    padding: 0.5rem 1rem;
     align-items: center;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -63,6 +67,7 @@ body {
     border-bottom: 0.5px solid #1f232b50;
 }
 .boxed-windowbar-button {
+    color: #cecece;
     background-color: #2a2f3a;
     padding: 0.4rem 1.1rem;
     text-align: center;
@@ -111,4 +116,29 @@ body {
 }
 .circled-windowbar-button.exit {
     background-color: #bf616a;
+}
+
+/* Past calculations section */
+.history {
+    background-color: #2c313c;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    height: 8rem;
+    align-items: flex-end;
+}
+.operation {
+    color: #cecece;
+    width: 8rem;
+}
+.equals {
+    color: #cecece;
+}
+.result, .output {
+    font-weight: bold;
+    color: #e7e8e9;
+}
+.result, .output, .operation {
+    font-size: 1.1rem;
 }
