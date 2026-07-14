@@ -15,7 +15,7 @@ function operate(num1, num2, operator) {
 }
 
 function parseInput(str) {
-    let parts = str.split(/\s*([\+\-\*\/])\s*/);
+    let parts = str.split(/\s*([\+\-\*\/×÷])\s*/);
 
     num1 = parseFloat(parts[0]);
     num2 = parseFloat(parts[2]);
@@ -34,10 +34,15 @@ inputBtns.addEventListener('click', (event) => {
         output.textContent = "";
         return;
     }
+    if (clickedBtn.classList.contains("equals")) {
+        parseInput(output.textContent);
+        let result = operate(num1, num2, operator);
+        output.textContent = result;
+        finalStr = result;
+    }
     if (clickedBtn.classList.contains("skip")) return;
 
     const btnText = clickedBtn.textContent;
     finalStr += btnText;
     output.textContent = finalStr;
-
 });
