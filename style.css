@@ -144,7 +144,7 @@ body {
     font-weight: bold;
     color: #e7e8e9;
 }
-.result, .output, .operation {
+.result, .calculation-result, .operation {
     font-size: 1.1rem;
 }
 
@@ -157,6 +157,13 @@ body {
     align-items: flex-start;
     height: 4rem;
     padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.error-display {
+    font-size: 0.8rem;
+    display: none;
 }
 
 /* Input keys section */
