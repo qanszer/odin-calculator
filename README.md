@@ -3,6 +3,8 @@
 ## What is it?
 This is the final project from The Odin Project's Foundations Course. It is a project that combines everything I've learned so far to make an on-screen calculator using JavaScript, HTML, and CSS.
 
+The design and functionality is heavily based on Ubuntu 22.04's default calculator.
+
 ## Status
 Work in progress
 
