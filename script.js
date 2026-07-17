@@ -2,32 +2,30 @@ let num1;
 let num2;
 let operator;
 let decimalUsed = false;
-
-let calculationResult = document.getElementById("calculation-result");
-calculationResult.focus();
-
-let inputBtns = document.querySelector(".input");
 let finalStr = "";
 let btnText;
-let errorDisplay = document.querySelector(".error-display");
 
 const equalsBtn = document.querySelector(".equals");
 const clearBtn = document.querySelector(".clear");
+let inputBtns = document.querySelector(".input");
+let errorDisplay = document.querySelector(".error-display");
+let calculationResult = document.getElementById("calculation-result");
+calculationResult.focus();
 
-function add(num1, num2) { return num1 + num2; }
-function subtract(num1, num2) { return num1 - num2; }
-function multiply(num1, num2) { return num1 * num2; }
-function divide(num1, num2) { return num1 / num2; }
-function exponent(num1, num2) { return num1 ** num2 }
-function modulo(num1, num2) { return num1 % num2 }
+function add      (num1, num2) { return num1 + num2; }
+function subtract (num1, num2) { return num1 - num2; }
+function multiply (num1, num2) { return num1 * num2; }
+function divide   (num1, num2) { return num1 / num2; }
+function exponent (num1, num2) { return num1 ** num2 }
+function modulo   (num1, num2) { return num1 % num2  }
 
 function operate(num1, num2, operator) {
-    if (operator === "+") return add(num1, num2);
-    if (operator === "-") return subtract(num1, num2);
+    if (operator === "+")                     return add(num1, num2);
+    if (operator === "-")                     return subtract(num1, num2);
     if (operator === "*" || operator === "×") return multiply(num1, num2);
     if (operator === "/" || operator === "÷") return divide(num1, num2);
-    if (operator === "^") return exponent(num1, num2);
-    if (operator === "mod") return modulo(num1, num2);
+    if (operator === "^")                     return exponent(num1, num2);
+    if (operator === "mod")                   return modulo(num1, num2);
 }
 
 function parseInput(str) {
@@ -119,10 +117,7 @@ function handleDecimal(decimalSymbol) {
 inputBtns.addEventListener('click', (event) => {
     finalStr = calculationResult.value;
     const clickedBtn = event.target.closest(".key");
-    if (!clickedBtn) {
-        calculationResult.focus();
-        return;
-    }
+    if (!clickedBtn) return;
 
     if (clickedBtn.classList.contains("clear")) {
         clearDisplay();
@@ -140,7 +135,6 @@ inputBtns.addEventListener('click', (event) => {
         handleDecimal(clickedBtn.textContent)
         return;
     }
-
     if (clickedBtn.classList.contains("operator")) {
         handleOperator(clickedBtn.textContent);
         return;

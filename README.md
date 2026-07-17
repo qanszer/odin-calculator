@@ -8,11 +8,20 @@ The design and functionality is heavily based on Ubuntu 22.04's default calculat
 ## Status
 Completed (Unless revisited)
 
+## Features
+- Clean design with hover effects
+- Keyboard support
+    - enter button or = button for calculation
+    - delete button for clear whole display
+- Instant calculation (try 12-7+1)
+- Clear error message (try 7-- or 7/0)
+
 ## My learnings from this project
 - JS event delegation for efficiency
 - Keyboard support
 - Dividing logic to separate functions for cleaner code
 - Importance of comments (I forgot some parts of my code after discontinuing for more than a week)
+- Refactoring for cleaner code readability
 - Improved familiarity with flexbox
 - Exclusion of certain class selectors
 - Selecting by class inside an `addEventListener`
