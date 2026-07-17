@@ -17,16 +17,20 @@ function add(num1, num2) { return num1 + num2; }
 function subtract(num1, num2) { return num1 - num2; }
 function multiply(num1, num2) { return num1 * num2; }
 function divide(num1, num2) { return num1 / num2; }
+function exponent(num1, num2) { return num1 ** num2 }
+function modulo(num1, num2) { return num1 % num2 }
 
 function operate(num1, num2, operator) {
     if (operator === "+") return add(num1, num2);
     if (operator === "-") return subtract(num1, num2);
     if (operator === "*" || operator === "×") return multiply(num1, num2);
     if (operator === "/" || operator === "÷") return divide(num1, num2);
+    if (operator === "^") return exponent(num1, num2);
+    if (operator === "mod") return modulo(num1, num2);
 }
 
 function parseInput(str) {
-    let parts = str.split(/\s*(?<![\+\-\*\/×÷\s])([\+\-\*\/×÷])\s*/);
+    let parts = str.split(/\s*(?<![\+\-\*\/×÷\^\s])([\+\-\*\/×÷\^]|mod)\s*/);
     parts = parts.filter(part => part !== undefined && part !== "");
 
     // if (parts.length === 3) {
