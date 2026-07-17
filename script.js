@@ -1,6 +1,7 @@
 let num1;
 let num2;
 let operator;
+let decimalUsed = false;
 
 let calculationResult = document.getElementById("calculation-result");
 calculationResult.focus();
@@ -33,16 +34,6 @@ function parseInput(str) {
     let parts = str.split(/\s*(?<![\+\-\*\/×÷\^\s])([\+\-\*\/×÷\^]|mod)\s*/);
     parts = parts.filter(part => part !== undefined && part !== "");
 
-    // if (parts.length === 3) {
-    //     num1 = parseFloat(parts[0]);
-    //     num2 = parseFloat(parts[2]);
-    //     operator = parts[1];
-    // }
-    // if (parts.length === 4 && parts[0] === "-") {
-    //     num1 = parseFloat(parts[0] + parts[1])
-    //     num2 = parseFloat(parts[3]);
-    //     operator = parts[2];
-    // }
     num1 = parseFloat(parts[0]);
     num2 = parseFloat(parts[2]);
     operator = parts[1];
@@ -57,18 +48,10 @@ function hideError() {
     errorDisplay.style.display = "none";
 }
 
-function handleInfinity(result) {
-    if (result === Infinity) {
-        showToDisplay(result);
-        showError("Division by zero is undefined");
-        return true;
-    }
-    return false;
-}
-
 function clearDisplay() {
     finalStr = "";
     calculationResult.value = "";
+    decimalUsed = false;
     hideError();
 }
 
@@ -81,6 +64,15 @@ function addToDisplay(clickedBtn) {
     btnText = clickedBtn;
     finalStr += btnText;
     calculationResult.value = finalStr;
+}
+
+function handleInfinity(result) {
+    if (result === Infinity) {
+        showToDisplay(result);
+        showError("Division by zero is undefined");
+        return true;
+    }
+    return false;
 }
 
 function handleEquals() {
@@ -96,15 +88,17 @@ function handleEquals() {
     }
 
     const result = operate(num1, num2, operator);
+    decimalUsed = false;
     if (handleInfinity(result)) return;
     showToDisplay(result);
     
     hideError();
 }
 
-function handleOperator(btnText) {
+function handleOperator(operatorSymbol) {
     parseInput(calculationResult.value);
-    addToDisplay(btnText);
+    addToDisplay(operatorSymbol);
+    decimalUsed = false;
 
     // Ensures num2 is typed before calculation
     if (Number.isNaN(num2)) return;
@@ -112,7 +106,13 @@ function handleOperator(btnText) {
     const result = operate(num1, num2, operator);
     showToDisplay(result)
     if (handleInfinity(result)) return;
-    addToDisplay(btnText);
+    addToDisplay(operatorSymbol);
+}
+
+function handleDecimal(decimalSymbol) {
+    if (decimalUsed) return;
+    decimalUsed = true;
+    addToDisplay(decimalSymbol);
 }
 
 
@@ -136,24 +136,29 @@ inputBtns.addEventListener('click', (event) => {
     // Excludes the clear and equals buttons from parseInput()
     if (clickedBtn.classList.contains("skip")) return;
 
+    if (clickedBtn.classList.contains("decimal")) {
+        handleDecimal(clickedBtn.textContent)
+        return;
+    }
+
     if (clickedBtn.classList.contains("operator")) {
         handleOperator(clickedBtn.textContent);
         return;
     }
 
     hideError();
-
     // Main appender of the clicked button
     addToDisplay(clickedBtn.textContent);
 });
 
+
+// Keyboard support
 equalsBtn.addEventListener("click", () => {
     handleEquals();
 })
 clearBtn.addEventListener("click", () => {
     clearDisplay();
 })
-
 window.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === "=") {
         event.preventDefault();
@@ -166,13 +171,28 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
+// Focus is always at the end of the line
 calculationResult.addEventListener("focus", () => {
-  const length = calculationResult.value.length; 
-  calculationResult.setSelectionRange(length, length); 
+    const length = calculationResult.value.length; 
+    calculationResult.setSelectionRange(length, length); 
 });
-
 document.addEventListener("click", (event) => {
     if (event.target !== calculationResult) {
         calculationResult.focus();
     }
 })
+
+// Decimals can only be typed once until a clear/equals
+calculationResult.addEventListener("keydown", (event) => {
+    if (event.key === " ") {
+        event.preventDefault();
+        return;
+    }
+    if (event.key === "." && decimalUsed) {
+        event.preventDefault();
+        return;
+    }
+    if (event.key === ".") {
+        decimalUsed = true;
+    }
+});

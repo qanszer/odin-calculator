@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="brief description about the website. this text matters because it often appears in Google search results under your page title, so it helps people decide whether to click on your site.">
+    <meta name="Odin Calculator" content="This is the final project from The Odin Project's Foundations Course. The design and functionality is heavily based on Ubuntu 22.04's default calculator.">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <title></title>
@@ -16,21 +16,24 @@
                 Basic
                 <img src="./assets/chevron-down.svg">
             </button>
+            <!-- Window bar of the calculator -->
             <div class="windowbar-buttons">
                 <button class="minimize circled-windowbar-button"><img src="./assets/minimize.svg" alt="minimize"></button>
                 <button class="maximize circled-windowbar-button"><img src="./assets/maximize.svg" alt="maximize"></button>
                 <button class="exit circled-windowbar-button"><img src="./assets/exit.svg" alt="exit"></button>
             </div>
         </div>
+        <!-- Display section -->
         <div class="history">
-            <div class="operation-display">999</div>
-            <div class="equals">=</div>
-            <div class="result">000</div>
+            <div class="operation-display"></div>
+            <div class="equals"></div>
+            <div class="result"></div>
         </div>
         <div class="output">
             <input type="text" id="calculation-result">
             <div class="error-display">Invalid expression</div>
         </div>
+        <!-- Input keys section -->
         <div class="input">
             <div class="first-row">
                 <button class="key clear skip"><img src="./assets/backspace.svg" alt="clear input"></button>
@@ -64,7 +67,7 @@
                     </div>
                     <div class="fifth-row">
                         <button class="key number 0">0</button>
-                        <button class="key decimal operator">.</button>
+                        <button class="key decimal">.</button>
                         <button class="key percentage" disabled>%</button>
                         <button class="key add operator">+</button>
                     </div>

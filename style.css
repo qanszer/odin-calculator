@@ -35,10 +35,6 @@ body {
 [id] { 
     scroll-margin-top: 150px; 
 }
-::selection {
-    /* background-color: ;
-    color: ; */
-}
 
 .container {
     background-color: #3b4252;
@@ -122,7 +118,7 @@ body {
     background-color: #bf616a;
 }
 
-/* Past calculations section */
+/* Display section */
 .history {
     background-color: #2c313c;
     display: flex;
