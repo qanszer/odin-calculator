@@ -2,11 +2,16 @@ let num1;
 let num2;
 let operator;
 
-let calculationResult = document.querySelector(".calculation-result");
+let calculationResult = document.getElementById("calculation-result");
+calculationResult.focus();
+
 let inputBtns = document.querySelector(".input");
 let finalStr = "";
 let btnText;
 let errorDisplay = document.querySelector(".error-display");
+
+const equalsBtn = document.querySelector(".equals");
+const clearBtn = document.querySelector(".clear");
 
 function add(num1, num2) { return num1 + num2; }
 function subtract(num1, num2) { return num1 - num2; }
@@ -24,6 +29,16 @@ function parseInput(str) {
     let parts = str.split(/\s*(?<![\+\-\*\/×÷\s])([\+\-\*\/×÷])\s*/);
     parts = parts.filter(part => part !== undefined && part !== "");
 
+    // if (parts.length === 3) {
+    //     num1 = parseFloat(parts[0]);
+    //     num2 = parseFloat(parts[2]);
+    //     operator = parts[1];
+    // }
+    // if (parts.length === 4 && parts[0] === "-") {
+    //     num1 = parseFloat(parts[0] + parts[1])
+    //     num2 = parseFloat(parts[3]);
+    //     operator = parts[2];
+    // }
     num1 = parseFloat(parts[0]);
     num2 = parseFloat(parts[2]);
     operator = parts[1];
@@ -49,23 +64,23 @@ function handleInfinity(result) {
 
 function clearDisplay() {
     finalStr = "";
-    calculationResult.textContent = "";
+    calculationResult.value = "";
     hideError();
 }
 
 function showToDisplay(result) {
-    calculationResult.textContent = result;
+    calculationResult.value = result;
     finalStr = result;
 }
 
 function addToDisplay(clickedBtn) {
     btnText = clickedBtn;
     finalStr += btnText;
-    calculationResult.textContent = finalStr;
+    calculationResult.value = finalStr;
 }
 
 function handleEquals() {
-    parseInput(calculationResult.textContent);
+    parseInput(calculationResult.value);
     
     // User clicked equalsBtn without an operator
     if (operator === undefined) return;
@@ -84,7 +99,7 @@ function handleEquals() {
 }
 
 function handleOperator(btnText) {
-    parseInput(calculationResult.textContent);
+    parseInput(calculationResult.value);
     addToDisplay(btnText);
 
     // Ensures num2 is typed before calculation
@@ -98,8 +113,12 @@ function handleOperator(btnText) {
 
 
 inputBtns.addEventListener('click', (event) => {
+    finalStr = calculationResult.value;
     const clickedBtn = event.target.closest(".key");
-    if (!clickedBtn) return;
+    if (!clickedBtn) {
+        calculationResult.focus();
+        return;
+    }
 
     if (clickedBtn.classList.contains("clear")) {
         clearDisplay();
@@ -123,3 +142,33 @@ inputBtns.addEventListener('click', (event) => {
     // Main appender of the clicked button
     addToDisplay(clickedBtn.textContent);
 });
+
+equalsBtn.addEventListener("click", () => {
+    handleEquals();
+})
+clearBtn.addEventListener("click", () => {
+    clearDisplay();
+})
+
+window.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === "=") {
+        event.preventDefault();
+        equalsBtn.click();
+    }
+
+    if (event.key === "Delete") {
+        event.preventDefault();
+        clearBtn.click();
+    }
+})
+
+calculationResult.addEventListener("focus", () => {
+  const length = calculationResult.value.length; 
+  calculationResult.setSelectionRange(length, length); 
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target !== calculationResult) {
+        calculationResult.focus();
+    }
+})

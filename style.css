@@ -144,7 +144,7 @@ body {
     font-weight: bold;
     color: #e7e8e9;
 }
-.result, .calculation-result, .operation {
+.result, #calculation-result, .operation {
     font-size: 1.1rem;
 }
 
@@ -160,6 +160,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+#calculation-result {
+    background-color: #2e3440;
+    width: 100%;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 .error-display {
     font-size: 0.8rem;
