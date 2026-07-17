@@ -34,3 +34,4 @@ Completed (Unless revisited)
 - Logic for negatives, parentheses, and percentages
 - Improved decimal logic for keyboard input
 - Functionality to windowbar buttons
+- Past calculations history right above the calculation result
