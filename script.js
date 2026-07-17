@@ -1,7 +1,12 @@
-let errorDisplay = document.querySelector(".error-display");
 let num1;
 let num2;
 let operator;
+
+let calculationResult = document.querySelector(".calculation-result");
+let inputBtns = document.querySelector(".input");
+let finalStr = "";
+let btnText;
+let errorDisplay = document.querySelector(".error-display");
 
 function add(num1, num2) { return num1 + num2; }
 function subtract(num1, num2) { return num1 - num2; }
@@ -24,81 +29,97 @@ function parseInput(str) {
     operator = parts[1];
 }
 
-let calculationResult = document.querySelector(".calculation-result");
-let inputBtns = document.querySelector(".input");
-let finalStr = "";
-let btnText;
+function showError(text) {
+    errorDisplay.textContent = text;
+    errorDisplay.style.display = "block";
+}
+
+function hideError() {
+    errorDisplay.style.display = "none";
+}
+
+function handleInfinity(result) {
+    if (result === Infinity) {
+        showToDisplay(result);
+        showError("Division by zero is undefined");
+        return true;
+    }
+    return false;
+}
+
+function clearDisplay() {
+    finalStr = "";
+    calculationResult.textContent = "";
+    hideError();
+}
+
+function showToDisplay(result) {
+    calculationResult.textContent = result;
+    finalStr = result;
+}
+
+function addToDisplay(clickedBtn) {
+    btnText = clickedBtn;
+    finalStr += btnText;
+    calculationResult.textContent = finalStr;
+}
+
+function handleEquals() {
+    parseInput(calculationResult.textContent);
+    
+    // User clicked equalsBtn without an operator
+    if (operator === undefined) return;
+    
+    // Parsing did not match the right variables
+    if (Number.isNaN(num1) || Number.isNaN(num2)) {
+        showError("Invalid expression");
+        return;
+    }
+
+    const result = operate(num1, num2, operator);
+    if (handleInfinity(result)) return;
+    showToDisplay(result);
+    
+    hideError();
+}
+
+function handleOperator(btnText) {
+    parseInput(calculationResult.textContent);
+    addToDisplay(btnText);
+
+    // Ensures num2 is typed before calculation
+    if (Number.isNaN(num2)) return;
+    
+    const result = operate(num1, num2, operator);
+    showToDisplay(result)
+    if (handleInfinity(result)) return;
+    addToDisplay(btnText);
+}
+
 
 inputBtns.addEventListener('click', (event) => {
     const clickedBtn = event.target.closest(".key");
-    errorDisplay.textContent = "Invalid expression";
     if (!clickedBtn) return;
+
     if (clickedBtn.classList.contains("clear")) {
-        finalStr = "";
-        calculationResult.textContent = "";
-        errorDisplay.style.display = "none";
+        clearDisplay();
         return;
     }
-    // if (errorDisplay.style.display === "block") return;
     if (clickedBtn.classList.contains("equals")) {
-        parseInput(calculationResult.textContent);
-        console.log("num1: " + num1);
-        console.log("num2: " + num2);
-        console.log("operator: " + operator);
-        if (operator === undefined) return;
-        if (Number.isNaN(num1) || Number.isNaN(num2)) {
-            errorDisplay.style.display = "block";
-            return;
-        }
-        let result = operate(num1, num2, operator);
-        if (result === Infinity) {
-            calculationResult.textContent = result;
-            finalStr = result;  
-            errorDisplay.textContent = "Division by zero is undefined";
-            errorDisplay.style.display = "block";
-            return;
-        }
-        calculationResult.textContent = result;
-        finalStr = result;
-        errorDisplay.style.display = "none";
+        handleEquals();
         return;
     }
-    if (clickedBtn.classList.contains("skip")) return;
-    if (clickedBtn.classList.contains("operator")) {
-        parseInput(calculationResult.textContent);
-        console.log("num1: " + num1);
-        console.log("num2: " + num2);
-        console.log("operator: " + operator);
-
-        btnText = clickedBtn.textContent;
-        finalStr += btnText;
-        calculationResult.textContent = finalStr;
-        if (Number.isNaN(num2)) {
-            return;
-        }
-        
-        let result = operate(num1, num2, operator);
-        calculationResult.textContent = result;
-        finalStr = result;
-
-        if (result === Infinity) {
-            errorDisplay.textContent = "Division by zero is undefined";
-            errorDisplay.style.display = "block";
-            return;
-        }
-
-        btnText = clickedBtn.textContent;
-        finalStr += btnText;
-        calculationResult.textContent = finalStr;
-
-        return;
-    }
-
-    console.log(finalStr);
-    errorDisplay.style.display = "none";
-    btnText = clickedBtn.textContent;
-    finalStr += btnText;
-    calculationResult.textContent = finalStr;
-
     
+    // Excludes the clear and equals buttons from parseInput()
+    if (clickedBtn.classList.contains("skip")) return;
+
+    if (clickedBtn.classList.contains("operator")) {
+        handleOperator(clickedBtn.textContent);
+        return;
+    }
+
+    hideError();
+
+    // Main appender of the clicked button
+    addToDisplay(clickedBtn.textContent);
 });
